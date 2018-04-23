@@ -1,0 +1,108 @@
+﻿<Window x:Class="MenuAdder.MenuAdderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MenuAdder"
+        mc:Ignorable="d"
+        Title="Menu Adder" 
+        Height="475" Width="600"
+        MinHeight="475" MinWidth="300">
+    <Window.Resources>
+        <Style x:Key="SubmitButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+        <Style x:Key="GroupBoxContainerStyle" TargetType="{x:Type GroupBox}">
+            <Setter Property="Margin" Value="10,10,10,10"/>
+        </Style>
+        <Style x:Key="DisplayTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+        </Style>
+        <Style x:Key="InputTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="20" HorizontalAlignment="Stretch">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+            </MenuItem>
+            <MenuItem Header="Network">
+                <MenuItem Header="Configure Settings"/>
+            </MenuItem>
+        </Menu>
+        <ListBox Name="LeftSideListBox"
+                 Width="200" DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1">
+            
+        </ListBox>
+        <Border BorderBrush="Black" BorderThickness="1">
+            <DockPanel>
+                <DockPanel Height="50" DockPanel.Dock="Bottom">
+                    <Button Content="Submit" DockPanel.Dock="Right"
+                        Style="{StaticResource SubmitButtonStyle}"/>
+                    <Button Content="Cancel" DockPanel.Dock="Right"
+                        Style="{StaticResource SubmitButtonStyle}"/>
+                    <Separator DockPanel.Dock="Right"/>
+                </DockPanel>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Info" Style="{StaticResource GroupBoxContainerStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Name:" Style="{StaticResource DisplayTextBlockStyle}" 
+                                   Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Text="Price:" Style="{StaticResource DisplayTextBlockStyle}" 
+                                   Grid.Row="1" Grid.Column="0"/>
+                            <TextBlock Text="Image URL:" Style="{StaticResource DisplayTextBlockStyle}" 
+                                   Grid.Row="2" Grid.Column="0"/>
+                            <TextBox Name="NameTextBox" Style="{StaticResource InputTextBoxStyle}" 
+                                 Grid.Row="0" Grid.Column="1"/>
+                            <TextBox Name="PriceTextBox" Style="{StaticResource InputTextBoxStyle}" 
+                                 Grid.Row="1" Grid.Column="1"/>
+                            <TextBox Name="ImageURLTextBox" Style="{StaticResource InputTextBoxStyle}" 
+                                 Grid.Row="2" Grid.Column="1"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Speech" Style="{StaticResource GroupBoxContainerStyle}">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="New Syllable:" Style="{StaticResource DisplayTextBlockStyle}"
+                                       Grid.Column="0"/>
+                                <TextBox Name="NewSyllableTextBox" Style="{StaticResource InputTextBoxStyle}"
+                                     Grid.Column="1"/>
+                                <Button Content="Add" Grid.Column="2"/>
+                            </Grid>
+                            <Separator DockPanel.Dock="Top"/>
+                            <DockPanel>
+                                <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                                    <Button Content="Remove"/>
+                                </StackPanel>
+                                <ScrollViewer DockPanel.Dock="Right" Height="100" VerticalScrollBarVisibility="Visible">
+                                    <ListBox Name="SyllablesListBox"
+                                     VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
+                                </ScrollViewer>
+                            </DockPanel>
+                        </DockPanel>
+                    </GroupBox>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</Window>
