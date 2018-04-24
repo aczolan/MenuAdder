@@ -1,0 +1,11 @@
+<menu>
+	<item>
+		<name>Soft Drink</name>
+		<price>$0.99</price>
+		<syllables>
+			<syllable>Soda</syllable>
+			<syllable>Coke</syllable>
+			<syllable>Pop</syllable>
+		</syllables>
+	</item>
+</menu>

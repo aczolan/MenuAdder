@@ -109,7 +109,8 @@
                                 </StackPanel>
                                 <ScrollViewer DockPanel.Dock="Right" Height="100" VerticalScrollBarVisibility="Visible">
                                     <ListBox Name="SyllablesListBox"
-                                     VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
+                                             ItemsSource="{Binding Syllables}"
+                                             VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
                                 </ScrollViewer>
                             </DockPanel>
                         </DockPanel>

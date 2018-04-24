@@ -52,20 +52,36 @@ namespace MenuAdder
 
             try
             {
-                XmlNodeList grandparents = doc.GetElementsByTagName("menu");
-                XmlNodeList parents = doc.GetElementsByTagName("item");
-                for (int i = 0; i < parents.Count; i++)
+                //XmlNodeList does not support foreach and it makes me upset
+
+                XmlNodeList itemNodes = doc.GetElementsByTagName("item");
+                for (int i = 0; i < itemNodes.Count; i++)
                 {
                     MenuItemViewModel childVM = new MenuItemViewModel();
 
-                    var children = parents[i].ChildNodes;
-                    for (int j = 0; j < children.Count; j++)
+                    var itemPropNodes = itemNodes[i].ChildNodes;
+                    for (int j = 0; j < itemPropNodes.Count; j++)
                     {
-                        var node = children[j];
+                        var node = itemPropNodes[j];
                         string nodeName = node.Name.Trim().ToLower();
                         string nodeContent = node.InnerText.Trim();
 
-                        CheckXMLTagToSetStringDictionary.FirstOrDefault((kvp) => kvp.Key(nodeName)).Value.Invoke(childVM, nodeContent);
+                        if (nodeName == "syllables")
+                        {
+                            XmlNodeList sylNodes = node.ChildNodes;
+                            for (int k = 0; k < sylNodes.Count; k++)
+                            {
+                                var sylNode = sylNodes[k];
+                                if (sylNode.Name == "syllable")
+                                {
+                                    childVM.Syllables.Add(sylNode.InnerText);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            CheckXMLTagToSetStringDictionary.FirstOrDefault((kvp) => kvp.Key(nodeName)).Value.Invoke(childVM, nodeContent);
+                        }
                     }
 
                     ViewModelCollection.Add(childVM);
@@ -99,7 +115,9 @@ namespace MenuAdder
         }
         #endregion
 
-        private string m_name;
+        private const string DEFAULT_STRING = "";
+
+        private string m_name = DEFAULT_STRING;
         public string Name
         {
             get => m_name;
@@ -113,7 +131,7 @@ namespace MenuAdder
             }
         }
 
-        private string m_price;
+        private string m_price = DEFAULT_STRING;
         public string Price
         {
             get => m_price;
@@ -127,7 +145,7 @@ namespace MenuAdder
             }
         }
 
-        private string m_imgURL;
+        private string m_imgURL = DEFAULT_STRING;
         public string ImgURL
         {
             get => m_imgURL;
@@ -137,6 +155,20 @@ namespace MenuAdder
                 {
                     m_imgURL = value;
                     NotifyPropertyChanged("ImgURL");
+                }
+            }
+        }
+
+        private ObservableCollection<string> m_syllables = new ObservableCollection<string>();
+        public ObservableCollection<string> Syllables
+        {
+            get => m_syllables;
+            set
+            {
+                if (value != m_syllables)
+                {
+                    m_syllables = value;
+                    NotifyPropertyChanged("Syllables");
                 }
             }
         }
