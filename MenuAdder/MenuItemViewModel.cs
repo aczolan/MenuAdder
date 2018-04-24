@@ -37,6 +37,20 @@ namespace MenuAdder
             }
         }
 
+        private MenuItemViewModel m_selectedViewModel;
+        public MenuItemViewModel SelectedViewModel
+        {
+            get => m_selectedViewModel;
+            set
+            {
+                if (value != m_selectedViewModel)
+                {
+                    m_selectedViewModel = value;
+                    NotifyPropertyChanged("SelectedViewModel");
+                }
+            }
+        }
+
         public void LoadViewModelsFromXMLFile(string filepath)
         {
             var CheckXMLTagToSetStringDictionary = new Dictionary<Func<string, bool>, Action<MenuItemViewModel, string>>()

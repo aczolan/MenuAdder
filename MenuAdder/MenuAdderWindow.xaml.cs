@@ -46,7 +46,7 @@ namespace MenuAdder
                 if (value != m_displayedViewModel)
                 {
                     m_displayedViewModel = value;
-                    NotifyPropertyChanged(nameof(DisplayedViewModel));
+                    NotifyPropertyChanged("DisplayedViewModel");
                 }
             }
         }
@@ -67,9 +67,44 @@ namespace MenuAdder
             }
         }
 
+        #region Button Handlers
+        private void XMLHelp_Click(object sender, RoutedEventArgs e)
+        {
+            string msg =
+                "XML Format is as follows:\n" +
+                "<menu>\n" +
+                    "\t<item>\n" +
+                        "\t\t<name>Name Here</name>\n" +
+                        "\t\t<price>$X.YZ </price>\n" +
+                        "\t\t<url>https://www.website.com/myimage.png</url>\n" +
+                        "\t\t<syllables>\n" +
+                            "\t\t\t<syllable>Syl1</syllable>\n" +
+                            "\t\t\t<syllable>Syl2</syllable>\n" +
+                            "\t\t\t<syllable>Syl3</syllable>\n" +
+                        "\t\t</syllables>\n" +
+                    "\t</item>\n" +
+                "</menu>";
+            MessageBox.Show(msg);
+        }
+
         private void DebugButton_Click(object sender, RoutedEventArgs e)
         {
             DisplayedViewModel.ViewModelCollection.Add(new MenuItemViewModel("thing", "$0.99", "thing.com"));
         }
+
+        private void AddSylButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayedViewModel.SelectedViewModel.Syllables.Add(NewSyllableTextBox.Text);
+        }
+
+        private void RemoveSylButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSyl = SyllablesListBox.SelectedItem as string;
+            if (selectedSyl != null)
+            {
+                DisplayedViewModel.SelectedViewModel.Syllables.Remove(selectedSyl);
+            }
+        }
+        #endregion
     }
 }

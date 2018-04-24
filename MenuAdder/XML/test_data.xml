@@ -10,8 +10,13 @@
 		<url>www.google.com</url>
 	</item>
 	<item>
-		<name>Soda</name>
+		<name>Soft Drink</name>
 		<price>$1.00</price>
 		<url>www.youtube.com</url>
+    <syllables>
+      <syllable>Coke</syllable>
+      <syllable>Pop</syllable>
+      <syllable>Cola</syllable>
+    </syllables>
 	</item>
 </menu>
