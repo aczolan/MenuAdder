@@ -1,15 +1,17 @@
-<item>
-	<name>Hamburger<name/>
-	<price>$2.50</price>
-	<url>www.imgur.com</url>
-</item>
-<item>
-	<name>Fries<name/>
-	<price>$0.50</price>
-	<url>www.google.com</url>
-</item>
-<item>
-	<name>Soda<name/>
-	<price>$1.00</price>
-	<url>www.youtube.com</url>
-</item>
+<menu>
+	<item>
+		<name>Hamburger</name>
+		<price>$2.50</price>
+		<url>www.imgur.com</url>
+	</item>
+	<item>
+		<name>Fries</name>
+		<price>$0.50</price>
+		<url>www.google.com</url>
+	</item>
+	<item>
+		<name>Soda</name>
+		<price>$1.00</price>
+		<url>www.youtube.com</url>
+	</item>
+</menu>

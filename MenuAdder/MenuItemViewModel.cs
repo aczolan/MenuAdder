@@ -13,7 +13,7 @@ namespace MenuAdder
     {
         #region PropertyChanged Stuff
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        protected void NotifyPropertyChanged(string propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -22,7 +22,7 @@ namespace MenuAdder
         }
         #endregion
 
-        private ObservableCollection<MenuItemViewModel> m_viewModelCollection;
+        private ObservableCollection<MenuItemViewModel> m_viewModelCollection = new ObservableCollection<MenuItemViewModel>();
         public ObservableCollection<MenuItemViewModel> ViewModelCollection
         {
             get => m_viewModelCollection;
@@ -31,9 +31,18 @@ namespace MenuAdder
                 if (value != m_viewModelCollection)
                 {
                     m_viewModelCollection = value;
-                    NotifyPropertyChanged(nameof(ViewModelCollection));
+                    NotifyPropertyChanged("ViewModelCollection");
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return "I am MIPVM.";
+        }
+
+        public MenuItemParentViewModel()
+        {
         }
     }
 
@@ -41,7 +50,7 @@ namespace MenuAdder
     {
         #region PropertyChanged Stuff
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        protected void NotifyPropertyChanged(string propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -59,7 +68,7 @@ namespace MenuAdder
                 if (value != m_name)
                 {
                     m_name = value;
-                    NotifyPropertyChanged(nameof(Name));
+                    NotifyPropertyChanged("Name");
                 }
             }
         }
@@ -73,7 +82,7 @@ namespace MenuAdder
                 if (value != m_price)
                 {
                     m_price = value;
-                    NotifyPropertyChanged(nameof(Price));
+                    NotifyPropertyChanged("Price");
                 }
             }
         }
@@ -87,9 +96,14 @@ namespace MenuAdder
                 if (value != m_imgURL)
                 {
                     m_imgURL = value;
-                    NotifyPropertyChanged(nameof(ImgURL));
+                    NotifyPropertyChanged("ImgURL");
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return (Name + ": " + Price);
         }
 
         public MenuItemViewModel()

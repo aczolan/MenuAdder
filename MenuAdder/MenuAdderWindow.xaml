@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MenuAdder"
         mc:Ignorable="d"
+        Name="_this"
         Title="Menu Adder" 
         Height="475" Width="600"
         MinHeight="475" MinWidth="300">
@@ -36,17 +37,23 @@
                 <MenuItem Header="Configure Settings"/>
             </MenuItem>
         </Menu>
-        <ListBox Name="LeftSideListBox"
-                 Width="200" DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1">
-            
-        </ListBox>
-        <Border BorderBrush="Black" BorderThickness="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <ListBox Name="LeftSideListBox"
+                     ItemsSource="{Binding ViewModelCollection}"
+                     Width="200" DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Border BorderBrush="Black" BorderThickness="1"
+                DataContext="{Binding ElementName=LeftSideListBox, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
             <DockPanel>
                 <DockPanel Height="50" DockPanel.Dock="Bottom">
                     <Button Content="Submit" DockPanel.Dock="Right"
                         Style="{StaticResource SubmitButtonStyle}"/>
                     <Button Content="Cancel" DockPanel.Dock="Right"
                         Style="{StaticResource SubmitButtonStyle}"/>
+                    <Button Content="Debug" DockPanel.Dock="Right"
+                            Style="{StaticResource SubmitButtonStyle}" Click="DebugButton_Click"/>
                     <Separator DockPanel.Dock="Right"/>
                 </DockPanel>
                 <StackPanel Orientation="Vertical">
@@ -67,12 +74,15 @@
                                    Grid.Row="1" Grid.Column="0"/>
                             <TextBlock Text="Image URL:" Style="{StaticResource DisplayTextBlockStyle}" 
                                    Grid.Row="2" Grid.Column="0"/>
-                            <TextBox Name="NameTextBox" Style="{StaticResource InputTextBoxStyle}" 
-                                 Grid.Row="0" Grid.Column="1"/>
+                            <TextBox Name="NameTextBox" Style="{StaticResource InputTextBoxStyle}"
+                                     Text="{Binding Name}"
+                                     Grid.Row="0" Grid.Column="1"/>
                             <TextBox Name="PriceTextBox" Style="{StaticResource InputTextBoxStyle}" 
-                                 Grid.Row="1" Grid.Column="1"/>
+                                     Text="{Binding Price}"
+                                     Grid.Row="1" Grid.Column="1"/>
                             <TextBox Name="ImageURLTextBox" Style="{StaticResource InputTextBoxStyle}" 
-                                 Grid.Row="2" Grid.Column="1"/>
+                                     Text="{Binding ImgURL}"
+                                     Grid.Row="2" Grid.Column="1"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Speech" Style="{StaticResource GroupBoxContainerStyle}">
