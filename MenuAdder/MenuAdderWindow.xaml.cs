@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace MenuAdder
 {
@@ -22,6 +25,7 @@ namespace MenuAdder
     /// </summary>
     public partial class MenuAdderWindow : Window, INotifyPropertyChanged
     {
+        #region PropertyChanged Stuff
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -30,9 +34,35 @@ namespace MenuAdder
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
 
         private MenuItemParentViewModel m_displayedViewModel;
-        public MenuItemParentViewModel DisplayedViewModel;
+        public MenuItemParentViewModel DisplayedViewModel
+        {
+            get => m_displayedViewModel;
+            set
+            {
+                if (value != m_displayedViewModel)
+                {
+                    m_displayedViewModel = value;
+                    NotifyPropertyChanged(nameof(DisplayedViewModel));
+                }
+            }
+        }
+
+        private string m_currentFileDir;
+
+        //todo replace this with a property
+        private void LoadContentFromFile(string filepath)
+        {
+
+            DisplayedViewModel = new MenuItemParentViewModel();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filepath);
+
+            XmlNodeList parents = doc.GetElementsByTagName("item");
+            //parents[0] todo
+        }
 
         private void ReadFromFile(string filepath)
         {
@@ -44,16 +74,20 @@ namespace MenuAdder
 
         }
 
-        private void InitializeViewModel()
-        {
-            //dummy viewmodel
-            DisplayedViewModel = new MenuItemParentViewModel();
-        }
-
         public MenuAdderWindow()
         {
             InitializeComponent();
-            InitializeViewModel();
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                m_currentFileDir = ofd.FileName;
+            }
+
+            LoadContentFromFile(m_currentFileDir);
         }
     }
 }
