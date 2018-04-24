@@ -37,12 +37,15 @@
                 <MenuItem Header="Configure Settings"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      BorderBrush="Black" BorderThickness="1"
+                      DockPanel.Dock="Left">
+            <DockPanel>
+                <Label Content="Items:" DockPanel.Dock="Top"/>
                 <ListBox Name="LeftSideListBox"
                      ItemsSource="{Binding ViewModelCollection}"
-                     Width="200" DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="1"/>
-            </StackPanel>
+                     Width="200" DockPanel.Dock="Top"/>
+            </DockPanel>
         </ScrollViewer>
         <Border BorderBrush="Black" BorderThickness="1"
                 DataContext="{Binding ElementName=LeftSideListBox, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">

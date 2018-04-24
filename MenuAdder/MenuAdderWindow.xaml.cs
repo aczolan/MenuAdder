@@ -51,52 +51,6 @@ namespace MenuAdder
             }
         }
 
-        //todo replace this with a property
-        private void UpdateViewModelsFromFile(string filepath)
-        {
-            var CheckXMLTagToSetStringDictionary = new Dictionary<Func<string, bool>, Action<MenuItemViewModel, string>>()
-            {
-                { (s) => s == "name"  , (vm, s) => vm.Name = s },
-                { (s) => s == "price" , (vm, s) => vm.Price = s },
-                { (s) => s == "url"   , (vm, s) => vm.ImgURL = s }
-            };
-            
-            DisplayedViewModel.ViewModelCollection = new ObservableCollection<MenuItemViewModel>();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filepath);
-
-            XmlNodeList grandparents = doc.GetElementsByTagName("menu");
-            XmlNodeList parents = doc.GetElementsByTagName("item");
-            for (int i = 0; i < parents.Count; i++)
-            {
-                MenuItemViewModel childVM = new MenuItemViewModel();
-
-                var children = parents[i].ChildNodes;
-                for (int j = 0; j < children.Count; j++)
-                {
-                    var node = children[j];
-                    string nodeName = node.Name.Trim().ToLower();
-                    string nodeContent = node.InnerText.Trim();
-
-                    CheckXMLTagToSetStringDictionary.FirstOrDefault((kvp) => kvp.Key(nodeName)).Value.Invoke(childVM, nodeContent);
-                }
-
-                DisplayedViewModel.ViewModelCollection.Add(childVM);
-            }
-
-            LeftSideListBox.Items.Refresh();
-        }
-
-        private void ReadFromFile(string filepath)
-        {
-
-        }
-
-        private void SaveToFile(string filepath)
-        {
-
-        }
-
         public MenuAdderWindow()
         {
             InitializeComponent();
@@ -109,7 +63,7 @@ namespace MenuAdder
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == true)
             {
-                UpdateViewModelsFromFile(ofd.FileName);
+                DisplayedViewModel.LoadViewModelsFromXMLFile(ofd.FileName);
             }
         }
 
