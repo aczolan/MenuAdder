@@ -37,6 +37,20 @@ namespace MenuAdder
             }
         }
 
+        private MenuItemViewModel m_selectedViewModel;
+        public MenuItemViewModel SelectedViewModel
+        {
+            get => m_selectedViewModel;
+            set
+            {
+                if (value != m_selectedViewModel)
+                {
+                    m_selectedViewModel = value;
+                    NotifyPropertyChanged("SelectedViewModel");
+                }
+            }
+        }
+
         public void LoadViewModelsFromXMLFile(string filepath)
         {
             var CheckXMLTagToSetStringDictionary = new Dictionary<Func<string, bool>, Action<MenuItemViewModel, string>>()
@@ -46,9 +60,15 @@ namespace MenuAdder
                 { (s) => s == "url"   , (vm, s) => vm.ImgURL = s }
             };
 
-            ViewModelCollection = new ObservableCollection<MenuItemViewModel>();
             XmlDocument doc = new XmlDocument();
-            doc.Load(filepath);
+            ViewModelCollection = new ObservableCollection<MenuItemViewModel>();
+
+            try
+            {
+                doc.Load(filepath);
+            }
+            catch(Exception e)
+            { }
 
             try
             {
@@ -66,15 +86,15 @@ namespace MenuAdder
                         string nodeName = node.Name.Trim().ToLower();
                         string nodeContent = node.InnerText.Trim();
 
-                        if (nodeName == "syllables")
+                        if (nodeName == "triggers")
                         {
-                            XmlNodeList sylNodes = node.ChildNodes;
-                            for (int k = 0; k < sylNodes.Count; k++)
+                            XmlNodeList trigNodes = node.ChildNodes;
+                            for (int k = 0; k < trigNodes.Count; k++)
                             {
-                                var sylNode = sylNodes[k];
-                                if (sylNode.Name == "syllable")
+                                var trigNode = trigNodes[k];
+                                if (trigNode.Name == "trigger")
                                 {
-                                    childVM.Syllables.Add(sylNode.InnerText);
+                                    childVM.Triggers.Add(trigNode.InnerText);
                                 }
                             }
                         }
@@ -88,8 +108,7 @@ namespace MenuAdder
                 }
             }
             catch(Exception e)
-            {
-            }
+            { }
         }
 
         public override string ToString()
@@ -159,16 +178,16 @@ namespace MenuAdder
             }
         }
 
-        private ObservableCollection<string> m_syllables = new ObservableCollection<string>();
-        public ObservableCollection<string> Syllables
+        private ObservableCollection<string> m_triggers = new ObservableCollection<string>();
+        public ObservableCollection<string> Triggers
         {
-            get => m_syllables;
+            get => m_triggers;
             set
             {
-                if (value != m_syllables)
+                if (value != m_triggers)
                 {
-                    m_syllables = value;
-                    NotifyPropertyChanged("Syllables");
+                    m_triggers = value;
+                    NotifyPropertyChanged("Triggers");
                 }
             }
         }

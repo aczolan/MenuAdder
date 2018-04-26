@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Name="_this"
         Title="Menu Adder" 
-        Height="475" Width="600"
-        MinHeight="475" MinWidth="300">
+        Height="500" Width="600"
+        MinHeight="400" MinWidth="300"
+        WindowState="Maximized">
+
     <Window.Resources>
         <Style x:Key="SubmitButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="75"/>
@@ -28,13 +30,16 @@
             <Setter Property="Height" Value="30"/>
         </Style>
     </Window.Resources>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="20" HorizontalAlignment="Stretch">
             <MenuItem Header="File">
                 <MenuItem Header="Load.." Click="LoadButton_Click"/>
+                <MenuItem Header="XML Format Help" Click="XMLHelp_Click"/>
+                <MenuItem Header="Debug Button" Click="DebugButton_Click"/>
             </MenuItem>
             <MenuItem Header="Network">
-                <MenuItem Header="Configure Settings"/>
+                <MenuItem Header="Configure Settings" Click="ConfigureNetwork_Click"/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -43,23 +48,26 @@
             <DockPanel>
                 <Label Content="Items:" DockPanel.Dock="Top"/>
                 <ListBox Name="LeftSideListBox"
-                     ItemsSource="{Binding ViewModelCollection}"
-                     Width="200" DockPanel.Dock="Top"/>
+                         ItemsSource="{Binding ViewModelCollection}"
+                         SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
+                         FontSize="15"
+                         Width="200" DockPanel.Dock="Top"/>
             </DockPanel>
         </ScrollViewer>
         <Border BorderBrush="Black" BorderThickness="1"
-                DataContext="{Binding ElementName=LeftSideListBox, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                DataContext="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Stretch">
             <DockPanel>
                 <DockPanel Height="50" DockPanel.Dock="Bottom">
-                    <Button Content="Submit" DockPanel.Dock="Right"
+                    <Button Content="Apply" DockPanel.Dock="Right"
                         Style="{StaticResource SubmitButtonStyle}"/>
-                    <Button Content="Cancel" DockPanel.Dock="Right"
-                        Style="{StaticResource SubmitButtonStyle}"/>
-                    <Button Content="Debug" DockPanel.Dock="Right"
-                            Style="{StaticResource SubmitButtonStyle}" Click="DebugButton_Click"/>
                     <Separator DockPanel.Dock="Right"/>
                 </DockPanel>
                 <StackPanel Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch">
+                        <Label Content="Network Address:" DockPanel.Dock="Left"/>
+                        <Label Name="NetworkAddressLabel" DockPanel.Dock="Left"/>
+                    </DockPanel>
                     <GroupBox Header="Info" Style="{StaticResource GroupBoxContainerStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -96,20 +104,20 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="New Syllable:" Style="{StaticResource DisplayTextBlockStyle}"
+                                <TextBlock Text="New Trigger:" Style="{StaticResource DisplayTextBlockStyle}"
                                        Grid.Column="0"/>
-                                <TextBox Name="NewSyllableTextBox" Style="{StaticResource InputTextBoxStyle}"
+                                <TextBox Name="NewTriggerTextBox" Style="{StaticResource InputTextBoxStyle}"
                                      Grid.Column="1"/>
-                                <Button Content="Add" Grid.Column="2"/>
+                                <Button Content="Add" Grid.Column="2" Click="AddSylButton_Click"/>
                             </Grid>
                             <Separator DockPanel.Dock="Top"/>
                             <DockPanel>
                                 <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
-                                    <Button Content="Remove"/>
+                                    <Button Content="Remove" Click="RemoveSylButton_Click"/>
                                 </StackPanel>
                                 <ScrollViewer DockPanel.Dock="Right" Height="100" VerticalScrollBarVisibility="Visible">
-                                    <ListBox Name="SyllablesListBox"
-                                             ItemsSource="{Binding Syllables}"
+                                    <ListBox Name="TriggersListBox"
+                                             ItemsSource="{Binding Triggers}"
                                              VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
                                 </ScrollViewer>
                             </DockPanel>
