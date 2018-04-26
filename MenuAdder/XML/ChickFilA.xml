@@ -1,0 +1,121 @@
+<menu>
+	<item>
+		<name>Chick Fil A Sandwich</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/kUs2s6i.png</url>
+		<triggers>
+			<trigger>chicken sandwich</trigger>
+			<trigger>sandwich</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Deluxe Sandwich</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/H3XptFQ.png</url>
+		<triggers>
+			<trigger>deluxe</trigger>
+			<trigger>deluxe sandwich</trigger>
+			<trigger>delux sandwich</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Handspun Milkshake</name>
+		<price>$3.59</price>
+		<url>https://i.imgur.com/E4PDt2y.png</url>
+		<triggers>
+			<trigger>handspun</trigger>
+			<trigger>milkshake</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Iced Tea</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/mUYyJQu.png</url>
+		<triggers>
+			<trigger>iced</trigger>
+			<trigger>tea</trigger>
+			<trigger>teeth</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Lemonade</name>
+		<price>$2.25</price>
+		<url>https://i.imgur.com/DVPsrXb.png</url>
+		<triggers>
+			<trigger></trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Soft Drink</name>
+		<price>$1.95</price>
+		<url>https://i.imgur.com/hh1v5aH.png</url>
+		<triggers>
+			<trigger>soda</trigger>
+			<trigger>pepsi</trigger>
+			<trigger>pop</trigger>
+			<trigger>coke</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Hot Coffee</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/Fj4hwZW.png</url>
+		<triggers>
+			<trigger>coffee</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Orange Juice</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/BWrGZqX.png</url>
+		<triggers>
+			<trigger>orange</trigger>
+			<trigger>oj</trigger>
+			<trigger>OJ</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Bottled Water</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/zaI6QCK.png</url>
+		<triggers>
+			<trigger>water bottle</trigger>
+			<trigger>water</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Chocolate Cookie</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/xxMzG2A.png</url>
+		<triggers>
+			<trigger>chocolate chip</trigger>
+			<trigger>chocolate chip cookie</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Frosted Lemonade</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/U2JWnSy.png</url>
+		<triggers>
+			<trigger>frosted</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Grilled Chicken Wrap</name>
+		<price>$3.59</price>
+		<url>https://i.imgur.com/8VJ6TXu.png</url>
+		<triggers>
+			<trigger>cool wrap</trigger>
+			<trigger>chicken wrap</trigger>
+			<trigger>grilled wrap</trigger>
+		</triggers>
+	</item>
+	<item>
+		<name>Waffle Fries</name>
+		<price>$1.00</price>
+		<url>https://i.imgur.com/gx1Trgh.png</url>
+		<triggers>
+			<trigger>fries</trigger>
+		</triggers>
+	</item>
+</menu>

@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Name="_this"
         Title="Menu Adder" 
-        Height="475" Width="600"
-        MinHeight="475" MinWidth="300">
-    
+        Height="500" Width="600"
+        MinHeight="400" MinWidth="300"
+        WindowState="Maximized">
+
     <Window.Resources>
         <Style x:Key="SubmitButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="75"/>
@@ -38,7 +39,7 @@
                 <MenuItem Header="Debug Button" Click="DebugButton_Click"/>
             </MenuItem>
             <MenuItem Header="Network">
-                <MenuItem Header="Configure Settings"/>
+                <MenuItem Header="Configure Settings" Click="ConfigureNetwork_Click"/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -49,23 +50,23 @@
                 <ListBox Name="LeftSideListBox"
                          ItemsSource="{Binding ViewModelCollection}"
                          SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
+                         FontSize="15"
                          Width="200" DockPanel.Dock="Top"/>
             </DockPanel>
         </ScrollViewer>
         <Border BorderBrush="Black" BorderThickness="1"
-                DataContext="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}">
+                DataContext="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Stretch">
             <DockPanel>
                 <DockPanel Height="50" DockPanel.Dock="Bottom">
-                    <Button Content="Submit" DockPanel.Dock="Right"
-                        Style="{StaticResource SubmitButtonStyle}"/>
-                    <Button Content="Cancel" DockPanel.Dock="Right"
+                    <Button Content="Apply" DockPanel.Dock="Right"
                         Style="{StaticResource SubmitButtonStyle}"/>
                     <Separator DockPanel.Dock="Right"/>
                 </DockPanel>
                 <StackPanel Orientation="Vertical">
                     <DockPanel HorizontalAlignment="Stretch">
-                        <Label Content="Network Status:" DockPanel.Dock="Left"/>
-                        <Label Content="?" DockPanel.Dock="Left"/>
+                        <Label Content="Network Address:" DockPanel.Dock="Left"/>
+                        <Label Name="NetworkAddressLabel" DockPanel.Dock="Left"/>
                     </DockPanel>
                     <GroupBox Header="Info" Style="{StaticResource GroupBoxContainerStyle}">
                         <Grid>
@@ -103,9 +104,9 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="New Syllable:" Style="{StaticResource DisplayTextBlockStyle}"
+                                <TextBlock Text="New Trigger:" Style="{StaticResource DisplayTextBlockStyle}"
                                        Grid.Column="0"/>
-                                <TextBox Name="NewSyllableTextBox" Style="{StaticResource InputTextBoxStyle}"
+                                <TextBox Name="NewTriggerTextBox" Style="{StaticResource InputTextBoxStyle}"
                                      Grid.Column="1"/>
                                 <Button Content="Add" Grid.Column="2" Click="AddSylButton_Click"/>
                             </Grid>
@@ -115,8 +116,8 @@
                                     <Button Content="Remove" Click="RemoveSylButton_Click"/>
                                 </StackPanel>
                                 <ScrollViewer DockPanel.Dock="Right" Height="100" VerticalScrollBarVisibility="Visible">
-                                    <ListBox Name="SyllablesListBox"
-                                             ItemsSource="{Binding Syllables}"
+                                    <ListBox Name="TriggersListBox"
+                                             ItemsSource="{Binding Triggers}"
                                              VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
                                 </ScrollViewer>
                             </DockPanel>

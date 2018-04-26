@@ -63,12 +63,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NetworkSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuAdderWindow.xaml.cs">
       <DependentUpon>MenuAdderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuItemViewModel.cs" />
+    <Compile Include="NetworkSettingsWindow.xaml.cs">
+      <DependentUpon>NetworkSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="XML\test_baddata.xml" />
-    <Resource Include="XML\test_data_syllables.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

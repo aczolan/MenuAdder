@@ -56,8 +56,11 @@ namespace MenuAdder
             InitializeComponent();
             DisplayedViewModel = new MenuItemParentViewModel();
             DataContext = DisplayedViewModel;
+            NetworkAddressLabel.Content = "127.0.0.1:1000/data.xml";
         }
 
+
+        #region Button Handlers
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -67,7 +70,6 @@ namespace MenuAdder
             }
         }
 
-        #region Button Handlers
         private void XMLHelp_Click(object sender, RoutedEventArgs e)
         {
             string msg =
@@ -77,11 +79,11 @@ namespace MenuAdder
                         "\t\t<name>Name Here</name>\n" +
                         "\t\t<price>$X.YZ </price>\n" +
                         "\t\t<url>https://www.website.com/myimage.png</url>\n" +
-                        "\t\t<syllables>\n" +
-                            "\t\t\t<syllable>Syl1</syllable>\n" +
-                            "\t\t\t<syllable>Syl2</syllable>\n" +
-                            "\t\t\t<syllable>Syl3</syllable>\n" +
-                        "\t\t</syllables>\n" +
+                        "\t\t<triggers>\n" +
+                            "\t\t\t<trigger>trig1</trigger>\n" +
+                            "\t\t\t<trigger>trig2</trigger>\n" +
+                            "\t\t\t<trigger>trig3</trigger>\n" +
+                        "\t\t</triggers>\n" +
                     "\t</item>\n" +
                 "</menu>";
             MessageBox.Show(msg);
@@ -94,16 +96,23 @@ namespace MenuAdder
 
         private void AddSylButton_Click(object sender, RoutedEventArgs e)
         {
-            DisplayedViewModel.SelectedViewModel.Syllables.Add(NewSyllableTextBox.Text);
+            DisplayedViewModel.SelectedViewModel.Triggers.Add(NewTriggerTextBox.Text);
         }
 
         private void RemoveSylButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedSyl = SyllablesListBox.SelectedItem as string;
+            var selectedSyl = TriggersListBox.SelectedItem as string;
             if (selectedSyl != null)
             {
-                DisplayedViewModel.SelectedViewModel.Syllables.Remove(selectedSyl);
+                DisplayedViewModel.SelectedViewModel.Triggers.Remove(selectedSyl);
             }
+        }
+
+        private void ConfigureNetwork_Click(object sender, RoutedEventArgs e)
+        {
+            NetworkSettingsWindow nsw = new NetworkSettingsWindow();
+            nsw.ShowDialog();
+            NetworkAddressLabel.Content = nsw.EnteredAddress;
         }
         #endregion
     }
