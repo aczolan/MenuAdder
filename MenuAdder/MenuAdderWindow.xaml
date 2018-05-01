@@ -60,7 +60,8 @@
             <DockPanel>
                 <DockPanel Height="50" DockPanel.Dock="Bottom">
                     <Button Content="Apply" DockPanel.Dock="Right"
-                        Style="{StaticResource SubmitButtonStyle}"/>
+                        Style="{StaticResource SubmitButtonStyle}"
+                        Click="ApplyButton_Click"/>
                     <Separator DockPanel.Dock="Right"/>
                 </DockPanel>
                 <StackPanel Orientation="Vertical">
